@@ -1,0 +1,916 @@
+////////////////////////////////////////////////////////////////////////////
+info="
+LIBRARY:  na.lib        Rudimentary handling of non-associative polynomials
+";
+
+
+/************************
+*** UTILITY FUNCTIONS ***
+************************/
+
+
+// Assertions to make sure things are working / being used as expected.
+// We assert that a condition must be true, otherwise we throw an error.
+//
+// One optional argument for providing an informative error string. 
+
+proc assert(int condition, list #)
+{
+  string error_string = "";
+  if( size(#) != 0 )
+  {
+    if( typeof(#[1]) != "string" )
+    {
+      ERROR("Optional argument to 'assert' must be of type 'string'");
+    }
+    error_string = ": " + #[1];
+  }  
+  if( condition != 1 )
+  {
+    ERROR("Assertion failed" + error_string);
+  }
+}
+
+
+// Check if the list 'as' is a subset of 'bs',
+// in the sense that every element of 'as' is
+// contained in 'bs'.
+
+proc is_subset(list as, list bs)
+{
+  int conjunction = 1;
+  int disjunction;
+  int j;
+  for (int i=1; i<=size(as); i++)
+  {
+    // Check if as[i] is contained in the list bs
+    disjunction = 0;
+    for (j=1; j<=size(bs); j++)
+    {
+      disjunction = disjunction or (as[i] == bs[j]); 
+    }
+    conjunction = conjunction and (disjunction >= 1); 
+  }
+  return( conjunction );
+}
+
+
+
+/*********************
+*** INITIALIZATION ***
+*********************/
+
+
+// For this library to work as intended, 'na_init' should be called before further use. 
+// The input is a list of strings, each of which will define a variable which can be used to form non-associative monomials. Variables with these names (representing degree 1 monomials) will be created in the global scope.
+// For example, 'na_init(list("a","b"))' makes 'a' and 'a*(b*a)' into valid Singular expressions.
+
+proc na_init(list var_names)
+{
+  // The string which is used to denote polynomial consisting only of the degree 0 monomial.
+  string na_identity_symbol = "E"; 
+  export(na_identity_symbol);
+ 
+  // See the NON-ASSOCIATIVE MONOMIALS section for the description of this structure.
+  newstruct( "na_mono" , "list tree" );
+
+  // We make it so that the * symbol can be used to multiply na_monos.
+  // By default the * operation is left-associative.
+  system("install", "na_mono" , "*" ,na_mono_multiplication_general, 2 );
+
+  // We add a default monomial to string conversion method.
+  system("install","na_mono","string",na_mono_to_string,1);
+
+  system("install","na_mono","==",na_mono_equality,2);
+
+  // This automatic type conversion has potential to cause trouble,
+  // since it is only valid for certain polynomials.
+  system("install","na_mono","=",na_poly_to_na_mono,1);
+
+  // A term is a pair, consisting of a coefficient (a standard
+  // Singular polynomial) and a na_mono.
+  newstruct( "na_term" , "list coefmon" );
+
+  system("install","na_term","string",na_term_to_string,1);
+
+  system("install", "na_term" , "*" ,na_term_multiplication, 2 );
+
+  system("install","na_term","==",na_term_equality,2);
+
+
+  // A non-associative polynomial is expressed as a list terms.
+  newstruct( "na_poly" , "list terms" );
+
+  // The embedding poly -> na_poly.
+  system("install", "na_poly", "=", na_cast_to_na_poly, 1);
+
+  // We add the monomial to string conversion as a default method.
+  system("install","na_poly","string",na_poly_to_string,1);
+
+  system("install", "na_poly" , "+" ,na_poly_addition, 2);
+
+  system("install", "na_poly" , "*" ,na_poly_multiplication, 2 );
+
+  system("install", "na_poly" , "-" ,na_poly_subtraction, 2 );
+
+  system("install", "na_poly","==",na_poly_equality,2);
+
+
+
+  na_mono na_identity_monomial;
+  na_identity_monomial.tree = list();
+  export(na_identity_monomial);  
+
+
+
+  na_declare_variables(var_names);
+  
+  na_declare_identity_polynomial(na_identity_symbol);
+
+  na_run_tests();
+}
+
+
+// Create names in the global scope that refer
+// to "atomic" non-associative polynomials
+// (non-associative polynomials consisting of
+// a single monomial, which is of degree 1).
+
+proc na_declare_variables(list var_names)
+{   
+  for(int i=1; i <= size(var_names); i++)
+  {
+    if( var_names[i] == na_identity_symbol ) 
+    {
+      ERROR("The symbol E is reserved for the non-associative identity element.");
+    }
+    
+    // Define the variable
+    execute("na_poly " + var_names[i] + " = na_mkvar(var_names[i])"); 
+    // and put it into the global namespace (the Top package).
+    execute("export(" + var_names[i] + ")" );
+    execute("exportto(Top," + var_names[i] + ")" );
+  }
+}
+
+
+// Exports the symbol that denotes the identity
+// polynomial to global scope. ('E' by default)
+
+proc na_declare_identity_polynomial(string id_symbol)
+{
+  execute("na_poly " + id_symbol + " = na_mono_to_na_poly(na_identity_monomial)"); 
+ 
+  execute("export(" + id_symbol + ")" );
+  execute("exportto(Top," + id_symbol + ")" );
+}
+
+
+/********************************
+*** NON-ASSOCIATIVE MONOMIALS ***
+********************************/
+
+
+// A monomial (in the free unital non-associative setting) is presented as a (binary) tree whose leaves are the variables.
+// The corresponding Singular structure is 'na_mono'.
+
+// list tree - a list which should be of precisely one of the following two forms:
+//            1) list(list a, list b)    -- The tree fork case, representing a product of two degree >= 1 monomials.
+//            2) list(string var)                      -- The leaf case, representing degree 1 monomials.
+//            3) list()                                -- The empty list, for handling degree 0 monomials.
+
+// We have respectively sizeof(monomial.tree) = 2 / 1 / 0, which we use
+// to differentiate between the three cases.
+
+
+/*-------------------------
+-- Submonomial accessors --
+-------------------------*/
+
+// If a monomial is not of degree < 2, then it is a product 'left*right' of two submonomials 'left' and 'right'. 
+
+proc na_get_left(na_mono m)
+{
+  assert(na_is_product(m), "Can't get the left part of a degree < 2 monomial.");
+
+  na_mono left_m;
+  left_m.tree = m.tree[1];
+
+  return(left_m);
+}
+
+
+proc na_get_right(na_mono m)
+{
+  assert(na_is_product(m), "Can't get the right part of a degree < 2 monomial.");
+
+  na_mono right_m;
+  right_m.tree = m.tree[2];
+
+  return(right_m);
+}
+
+
+proc na_get_var(na_mono m)
+{
+  assert(na_is_var(m), "Can only get the variable name of a degree 1 monomial.");
+  return( m.tree[1] );
+}
+
+
+
+// Return a new monomial where the left factor of 'm'
+// is replaced with 'new_left".
+// Only applicable to degree >=2 monomials.
+
+proc na_set_left(na_mono m, na_mono new_left)
+{
+  assert(na_is_product(m), "Can't set the left part of a degree < 2 monomial.");
+
+  na_mono new_m;
+  new_m.tree = list(new_left.tree , m.tree[2]);
+  return(new_m);
+}
+
+
+proc na_set_right(na_mono m, na_mono new_right)
+{
+  assert(na_is_product(m), "Can't set the right part of a degree < 2 monomial.");
+
+  na_mono new_m = m;
+  new_m.tree = list(m.tree[1], new_right.tree);
+  return(new_m);
+}
+
+
+// The string argument 'path' describes the path one needs to
+// take in the multiplication tree, starting from the root node
+// (meaning the outermost multiplication operation), in order
+// to reach the submonomial we want to retrieve.
+// 
+// 'path' is a string of 'L'-s and 'R'-s, where
+// L = go left in a branch
+// R = go right in a branch
+//
+// For example (non-evaluable expressions):
+// na_get_submonomial( (ab)(cd) , "L" ) -> ab
+// na_get_submonomial( (ab)(cd) , "R" ) -> cd
+// na_get_submonomial( (ab)(cd) , "LL" ) -> a
+// na_get_submonomial( (ab)(cd) , "LR" ) -> b
+// na_get_submonomial( (ab)(cd) , "RL" ) -> c
+// na_get_submonomial( (ab)(cd) , "RR" ) -> d
+
+proc na_get_submonomial(na_mono m, string path)
+{
+  na_mono subm = m;
+  
+  for(int i=1; i <= size(path); i++)
+  {
+    assert( size(subm.tree) == 2,
+      "'path' leads outside of the multiplication tree.");
+
+    if(path[i] == "L")
+    {
+      subm = na_get_left(subm);
+    }
+    else
+    {
+      if(path[i] == "R")
+      {
+        subm = na_get_right(subm);
+      }
+      else
+      {
+        ERROR("Invalid 'path' argument in 'na_get_submonomial'");
+      }
+    }
+  }
+  return(subm);
+}
+
+
+// Returns a new monomial, constructed by replacing a 
+// submonomial of 'm', the location of which is given 
+// by 'path', with a new submonomial.
+
+proc na_set_submonomial(na_mono m, na_mono new_subm, string path)
+{
+  if ( path == "" )
+  {
+    return(new_subm);
+  }
+  if ( path[1] == "L" )
+  {
+    if (size(path) == 1)
+    {
+      return(na_set_left(m, new_subm)); 
+    }
+    else
+    { // 'path[2,size(path)-1]' is 'path' minus the first character.
+      return( na_set_left(m, na_set_submonomial( 
+         na_get_left(m), new_subm, path[2,size(path)-1])) ); 
+    }
+  }
+  if ( path[1] == "R" )
+  {
+    if (size(path) == 1)
+    {
+      return(na_set_right(m, new_subm)); 
+    }
+    else
+    {
+      return( na_set_right(m, na_set_submonomial( 
+         na_get_right(m), new_subm, path[2,size(path)-1])) ); 
+    }
+  }
+  ERROR("Malformed 'path' input in 'na_set_submonomial'.");
+}
+
+
+// Substitute a 'na_poly' into a 'na_mono' by applying
+// 'na_set_submonomial' to each monomial of the 'na_poly'
+
+proc na_subst_na_poly_into_submonomial(na_mono m, na_poly p, string path)
+{
+  na_poly new_p;
+
+  for(int i=1; i<=size(p.terms); i++)
+  { 
+    new_p.terms = insert(new_p.terms,
+                         na_mkterm(na_get_coef(p.terms[i]),
+                                   na_set_submonomial(m,
+                                                      na_get_mon(p.terms[i]),
+                                                      path)),
+                         size(new_p.terms));
+  }
+  return(new_p);
+}
+
+
+// To facilitate the use of the above procedures, the following
+// function finds all submonomials of 'm' equal to 'subm' and returns
+// a list of paths. Each path leads to an occurrence of 'subm' in 'm'.
+//
+// We assume that the degree of 'm' is strictly greater than the degree
+// of 'subm' and that 'subm' is not the identity monomial.
+
+proc na_find_submonomial(na_mono m, na_mono subm)
+{
+  na_mono left = na_get_left(m);
+  na_mono right = na_get_right(m);
+
+  list search_results = list();  
+  list deeper_search;
+  int i;
+
+  if (left == subm)
+  {
+    search_results = insert(search_results, "L"); 
+  }
+  else
+  {
+    if ( na_is_product(left) )
+    {
+      deeper_search = na_find_submonomial(left, subm);
+      for (i=1; i<=size(deeper_search); i++)
+      {
+         search_results = insert(search_results, "L" + deeper_search[i]);
+      }
+    }
+  }
+
+  if (right == subm)
+  {
+    search_results = insert(search_results, "R"); 
+  }
+  else
+  {
+    if ( na_is_product(right) )
+    {
+      deeper_search = na_find_submonomial(right , subm);
+      for (i=1; i<=size(deeper_search); i++)
+      {
+         search_results = insert(search_results, "R" + deeper_search[i]);
+      }
+    }
+  }
+  return( search_results );
+}
+
+
+
+/*--------------------------------
+-- Monomial degree and equality --
+--------------------------------*/
+
+
+// Is the monomial expressible as a product of two submonomials?
+// Equivalently, is the degree of the monomial >= 2?
+
+proc na_is_product(na_mono m)
+{
+  return( size(m.tree) == 2 );
+}
+
+
+// Does the consist of a single variable symbol?
+// Equivalently, is the degree of the monomial 1?
+
+proc na_is_var(na_mono m)
+{
+  return( size(m.tree) == 1 );
+}
+
+
+// Is the monomial the identity monomial?
+// Equivalently, is the degree of the monomial 0?
+
+proc na_is_identity(na_mono m)
+{
+  return( size(m.tree) == 0 );
+}
+
+
+// The degree of the monomial.
+
+proc na_mono_deg(na_mono m)
+{
+  if( size(m.tree) < 2 )
+  {
+    return( size(m.tree) );
+  }
+  else
+  {
+    return( na_mono_deg(na_get_left(m)) + na_mono_deg(na_get_right(m)) );
+  }
+}
+
+
+proc na_mono_equality(na_mono m, na_mono n)
+{
+  int deg_m = na_mono_deg(m);
+
+  if( deg_m != na_mono_deg(n) )
+  {
+    return(0);
+  }
+  if( deg_m == 0 )
+  {
+    return(1);
+  }
+  if( deg_m == 1 )
+  {
+    return( na_get_var(m) == na_get_var(n) );
+  }
+  else
+  {
+    return( na_mono_equality(na_get_left(m), na_get_left(n)) 
+        and na_mono_equality(na_get_right(m), na_get_right(n)) );
+  }
+}
+
+
+/*---------
+-- Other --
+---------*/
+
+
+// Return a degree 1 'na_poly' consisting of
+// one monomial, the variable in which will
+// be denoted by 'var_name'.
+// This variable name will not be automatically
+// exported to global scope.
+
+proc na_mkvar(string var_name)
+{
+  na_mono m;
+  m.tree = list(var_name);
+
+  // We embed the monomial into a na_poly before returning it.
+  return( na_mono_to_na_poly(m) );
+}
+
+
+// The purpose of this function is to provide a convenient way
+// of creating create objects of type 'na_mono" using the
+// declared variables. 
+// By default an expression like 'a*(b*c)' is of type 'na_poly',
+// but 'na_poly_to_na_mono( a*(b*c) )' will give us a 'na_mono'.
+//
+// This function is at the moment applied implicitly whenever
+// Singular needs to convert a 'na_poly' to 'na_'mono'
+// (see the 'install' instruction in 'na_init'), but this
+// could potentially cause this function to be unexpectedly called 
+// in situation where the assertions are not satisfied
+
+proc na_poly_to_na_mono(na_poly p)
+{ 
+  assert( size(p.terms) == 1 , "Unexpected input to 'na_poly_to_na_mono");
+  assert( na_get_coef(p.terms[1]) == 1, "Unexpected input to 'na_poly_to_na_mono");
+  return( na_get_mon(p.terms[1]) );
+}
+
+
+/*---------------------------
+-- Monomial multiplication --
+---------------------------*/
+
+
+proc na_mono_multiplication(na_mono m, na_mono n)
+{
+  if ( m == na_identity_monomial )
+  {
+    return( n );
+  }
+  if ( n == na_identity_monomial )
+  {
+    return( m );
+  }
+
+  na_mono product;
+  product.tree = list(m.tree, n.tree);
+  return( product );
+}
+
+
+// We make it so that any (expected) multiplication
+// operation involving 'na_mono' uses polynomial
+// multiplication, except for the case where both
+// of the arguments are of type 'na_mono'.
+
+proc na_mono_multiplication_general()
+{
+  branchTo("int","na_mono",na_poly_multiplication);
+  branchTo("poly","na_mono",na_poly_multiplication);
+  branchTo("na_mono","int",na_poly_multiplication);
+  branchTo("na_mono","poly",na_poly_multiplication);
+
+  branchTo("na_mono","na_mono",na_mono_multiplication);
+
+  ERROR("'na_mono_multiplication' applied to unexpected arguments.");
+}
+
+
+
+/*---------------------------------
+-- Monomial to string conversion --
+---------------------------------*/
+
+// We can convert the multiplication tree to the usual string
+// representation involving parentheses and variables.
+
+proc na_mono_to_string(na_mono m)
+{
+  if ( na_is_identity(m) )
+  {
+    return( na_identity_symbol );
+  } 
+
+  if ( na_is_var(m) )
+  {
+    return( na_get_var(m) );
+  }
+
+  // Now we know that m = left * right.
+  
+  na_mono left = na_get_left(m);
+  na_mono right = na_get_right(m);
+
+  string left_string;
+  string right_string;
+
+  // If the left (or right) part is of degree 1, we don't add parentheses around it.
+  if( na_is_var(left) )
+  {
+    left_string = na_get_var(left);
+  }
+  else
+  {
+    left_string = "(" + na_mono_to_string(left) + ")";
+  }
+
+  if( na_is_var(right) )
+  {
+    right_string = na_get_var(right);
+  }
+  else
+  {
+    right_string = "(" + na_mono_to_string(right) + ")";
+  }
+
+  return( left_string + "*" + right_string );
+}
+
+
+
+/****************************
+*** NON-ASSOCIATIVE TERMS ***
+****************************/
+
+
+// Construct a term with a given coefficient
+// and a monomial.
+
+proc na_mkterm(poly cf, na_mono m)
+{
+  na_term t;
+  t.coefmon = list(cf, m);
+  return(t);
+}
+
+
+// The embedding na_mono -> na_term
+
+proc na_mono_to_na_term(na_mono m)
+{
+  na_term t;
+  t.coefmon = list(poly(1), m);
+  return(t);
+}
+
+
+// Accessor for the coefficient of a term.
+
+proc na_get_coef(na_term t)
+{
+  return( t.coefmon[1] );
+}
+
+
+// Accessor for the non-associative monomial of the term.
+
+proc na_get_mon(na_term t)
+{
+  return( t.coefmon[2] );
+}
+
+
+proc na_term_multiplication(na_term t, na_term s)
+{
+  na_term product;
+
+  product.coefmon = list(na_get_coef(t) * na_get_coef(s), na_get_mon(t) * na_get_mon(s));
+  return( product );
+}
+
+
+proc na_term_to_string(na_term t)
+{
+  string coef_string = "";
+  if ( na_get_coef(t) != poly(1) )
+  {
+    coef_string = string(na_get_coef(t));
+
+    // If the coefficient string contains "+", we add parentheses.
+    if ( find(coef_string, "+") > 0 )
+    {
+      coef_string = "(" + coef_string + ")";
+    }
+    coef_string = coef_string + "*";
+  }
+  return(coef_string + string(na_get_mon(t)));
+}
+
+
+proc na_term_equality(na_term t, na_term s)
+{
+  return( (na_get_coef(t) == na_get_coef(s)) 
+      and (na_get_mon(t) == na_get_mon(s)) );
+}
+
+
+
+/**********************************
+*** NON-ASSOCIATIVE POLYNOMIALS ***
+**********************************/
+
+
+/*-------------
+-- Accessors --
+-------------*/
+
+
+proc na_get_coefficients(na_poly p)
+{
+  na_poly p_collected = na_poly_collect_terms(p); 
+
+  list coefs_of_p = list();
+
+  for(int i=1; i<=size(p_collected.terms); i++)
+  {
+    coefs_of_p = insert(coefs_of_p,
+                        na_get_coef(p_collected.terms[i]),
+                        size(coefs_of_p) );
+  }
+
+  return( coefs_of_p );
+}
+
+
+proc na_get_monomials(na_poly p)
+{
+  na_poly p_collected = na_poly_collect_terms(p); 
+
+  list monomials_of_p = list();
+
+  for(int i=1; i<=size(p_collected.terms); i++)
+  {
+    monomials_of_p = insert(monomials_of_p,
+                        na_get_mon(p_collected.terms[i]),
+                        size(monomials_of_p) );
+  }
+
+  return( monomials_of_p );
+}
+
+
+/*---------------------------------------
+-- Algebraic operations on polynomials --
+---------------------------------------*/
+
+
+// If the list contains multiple terms with the same monomial,
+// add the coefficients and delete the repetitions. Additionally
+// remove the terms with with a zero coefficient.
+
+proc na_poly_collect_terms(na_poly p)
+{
+  na_poly new_p = p;
+
+  int j;
+  for(int i=1; i<=size(new_p.terms); i++)
+  {
+    for(j=i+1; j<=size(new_p.terms); j++)
+    {
+      if( na_get_mon(new_p.terms[i]) == na_get_mon(new_p.terms[j]) )
+      {
+        new_p.terms[i].coefmon[1] = na_get_coef(new_p.terms[i]) + na_get_coef(new_p.terms[j]);  // Rewrite this?
+        new_p.terms = delete(new_p.terms,j);
+        j--;
+      }
+    }
+    
+    if( na_get_coef(new_p.terms[i]) == 0 )
+    {
+      new_p.terms = delete(new_p.terms,i);
+      i--;
+    }
+  }
+
+  return( new_p );
+}
+
+
+proc na_poly_addition(na_poly p, na_poly q)
+{
+  na_poly join_poly;
+  join_poly.terms = p.terms + q.terms;  
+
+  return( na_poly_collect_terms(join_poly) );
+}
+
+
+// Multiply two na_poly to get a new na_poly.
+
+proc na_poly_multiplication(na_poly p, na_poly q)
+{
+  na_poly join_poly;
+  join_poly.terms = list();
+
+  int j;
+  for(int i=1; i<=size(p.terms); i++)
+  {
+    for(j=1; j<=size(q.terms); j++)
+    {
+      join_poly.terms = insert(join_poly.terms,
+                               p.terms[i]*q.terms[j],
+                               size(join_poly.terms)); 
+    }
+  }
+
+  return( na_poly_collect_terms(join_poly) );
+}
+
+
+proc na_poly_subtraction(na_poly p, na_poly q)
+{
+  return( p + (-1)*q );
+}
+
+
+/*---------
+-- Other --
+---------*/
+
+
+proc na_poly_equality(na_poly p, na_poly q)
+{
+  na_poly p_collected = na_poly_collect_terms(p);
+  na_poly q_collected = na_poly_collect_terms(q);
+  
+  if( size(p_collected.terms) != size(q_collected.terms) )
+  {
+    return(0);
+  }
+
+  return( is_subset(p_collected.terms, q_collected.terms) );
+}
+
+
+// Degree of a non-associative polynomial.
+
+proc na_deg(na_poly p)
+{
+  list terms = na_poly_collect_terms(p).terms;
+  
+  int deg_max = 0;
+
+  for(int i=1; i <= size(terms); i++)
+  {
+    deg_max = max(deg_max, na_mono_deg(na_get_mon(terms[i])) );
+  }
+
+  return( deg_max );
+}
+
+
+
+/*-----------------------------------
+-- Polynomial to string conversion --
+-----------------------------------*/
+
+
+// The goal with the na_poly -> string conversion is that the output
+// should be able to be directly parsed by Singular, and
+// evaluate to a na_poly equal to the initial na_poly.
+
+proc na_poly_to_string(na_poly p)
+{
+  if( size(p.terms) == 0 )
+  {
+    return("0");
+  }
+  string poly_string;
+ 
+
+  poly_string = string(p.terms[1]);
+
+  for (int i=2; i<=size(p.terms); i++)
+  {
+    poly_string = poly_string + " + " + string(p.terms[i]);
+  }
+
+  // Check that Singular will parse and evaluate 'poly_string'
+  // to be a polynomial equal to 'p'.
+  execute("assert((" + poly_string + ") == p,\"Unexpected na_poly->string output\")");
+
+  return( poly_string );
+}
+
+
+/*-----------------------------------------
+-- Converting other types to polynomials --
+-----------------------------------------*/
+
+
+proc na_cast_to_na_poly()
+{
+  branchTo("poly",na_poly_from_poly);
+  branchTo("int",na_poly_from_poly);
+  branchTo("na_mono",na_mono_to_na_poly);
+
+  ERROR("Cast to na_poly failed");
+}
+
+
+// Any non-associative monomial induces a non-associative
+// polynomial, where the coefficient of the monomial is '1'.
+proc na_mono_to_na_poly(na_mono m)
+{
+  na_poly p;
+  p.terms = list(na_mono_to_na_term(m));
+  return( p );
+}
+
+
+// The embedding poly -> na_poly as multiples of the
+// non-associative identity monomial.
+proc na_poly_from_poly(poly cf)
+{
+  na_poly p;
+  p.terms = list(na_mkterm(cf,na_identity_monomial));
+  return( p );
+}
+
+
+
+/************
+*** TESTS ***
+************/
+
+
+proc na_run_tests()
+{
+  // Run some tests to try to catch unintended behavior.
+}
+

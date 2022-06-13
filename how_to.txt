@@ -1,0 +1,105 @@
+/******************************************
+*** HOW TO GENERATE AND SOLVE EQUATIONS ***
+******************************************/
+
+/*
+
+1) Executing 'generate_equations.txt' in Singular
+   creates 'equations.txt', which contains the
+   equations.
+   This step needs 'na.lib.txt' in the same folder.
+
+1) Executing 'solve_equations.txt' in Singular
+   tries to solve the equations in 'equations.txt'.
+   This does NOT need 'na.lib.txt' in the same folder.
+
+NOTE: All filenames have .txt appended to the end so
+      that Overleaf recognizes them as text files.
+
+*/
+
+/**********************************************
+*** HOW TO USE NON-ASSOCIATIVE POLYNOMIALS  ***
+**********************************************/
+
+/*
+
+'na.lib.txt' defines the data type 'na_poly'
+which represents a non-associative polynomial.
+Some elementary operations like addition and
+multiplication are implemented.
+
+'na.lib.txt' also includes the 'na_mono' data
+type, which implements a non-associative monomial
+(element of a free unital magma).
+Some elementary operations are possible, like
+multiplication and lookup and replacement of subwords.
+
+Warning: The calculations are REALLY slow. 
+
+*/
+
+// Example ring
+ring r=0,(x,y),dp;	
+
+// A custom library providing rudimentary handling of
+// non-associative polynomials.
+LIB "na.lib.txt";
+
+// Names of the variables that will be used to form
+// non-associative monomials.
+list na_vars = list("a","b","c","d");
+
+// Initialize the non-associative algebra module. This means:
+// declare structures and variables; install methods.
+na_init(na_vars);
+
+// After this point we can form nonassociative polynomials
+// of type 'na_poly' as follows:
+
+na_poly example_p = 2*a*(b*c) - 3*b*b;
+
+// Objects of type 'na_poly' represent the elements of the
+// free unital non-associative algebra over the "set" 'na_vars'.
+// The coefficients are the standard Singular polynomials (type 'poly').
+// The identity monomial is represented by E.
+
+assert( a*E == a ); // a*E evaluates to a
+// 'assert' will throw an error if the statement is false.
+
+// We can get the coefficients of a non-associative polynomial
+// as follows:
+na_get_coefficients(example_p); // Returns list(2, -3);
+
+// A FEW REMARKS:
+
+// 1) The operation '*' is left-associative by default.
+
+assert( a*b*c == (a*b)*c );  // 'a*b*c' evaluates to '(a*b)*c'
+
+// 2) The coefficients are shown in front of the monomials,
+//    separated by a '*' symbol.
+poly p = xy; 
+assert( a*(p*(b*p)) == x2y2*a*b ); // 'a*(p*(b*p))' evaluates to 'x2y2*a*b'
+
+// 3) If the internal representation of a 'na_poly' is converted
+//    to a string, that string a is a valid Singular expression
+//    that evaluates (up to '==') to the original 'na_poly' object.
+
+// 4) 'na_monomial' is a type which represents a single monomial.
+//    It is always possible to cast 'na_monomial' to 'na_poly'. 
+//    
+//    In the other direction, if 'na_poly' consists of a single
+//    monomial with a coefficient '1', then it is possible to
+//    convert it to the 'na_monomial' type.
+//
+//    If Singular sees that 'na_monomial' is in a location where
+//    'na_poly' is needed (or the other way around), a conversion
+//    will happen automatically.
+//
+//    If a conversion needs to be made that Singular does not 
+//    detect, then one can write 'na_poly(m)' to turn a 'na_monomial'
+//    into a 'na_poly' or 'na_monomial(p)' to turn a suitable
+//    'na_poly' into a 'na_monomial'.
+
+
