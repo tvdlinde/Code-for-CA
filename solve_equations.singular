@@ -81,7 +81,7 @@ if( size(eqs) > 0 )
   ideal sm=liftstd(ei,T);
   sm;
   int k;
-  write(":w output-m.mathematica","m = " + string(sm))
+  write(":w output-m.mathematica","m = " + string(sm));
   for (k=1; k<=size(eqs); k=k+1) {
     write(":a output-m.mathematica","f[" + string(k) + "] = " + string(eqs[size(eqs)-k+1]) + ";");
     write(":a output-m.mathematica","mu[" + string(k) + "] = " + string(T[k,1]) + ";");
