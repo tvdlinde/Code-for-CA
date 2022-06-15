@@ -170,7 +170,7 @@ proc transform_monomial(na_mono subm, na_mono m)
 
   if( size(occurrences) == 0 )
   {
-    // If 'subm' does not apprear in 'm' as a submonomial,
+    // If 'subm' does not appear in 'm' as a submonomial,
     // we return 'm' as a 'na_poly'.
     return( na_poly(m) );
   }

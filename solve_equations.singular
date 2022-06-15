@@ -26,8 +26,7 @@ proc read_equations()
 // SOLVING THE EQUATIONS //
 ///////////////////////////
 
-
-proc solve_equations(list eqs)
+proc make_ideal(list eqs)
 {
   ideal ei = eqs[size(eqs)];
   
@@ -36,6 +35,11 @@ proc solve_equations(list eqs)
     ei = ei + eqs[i];
   }
 
+  return( ei );
+}
+
+proc solve_equations(ideal ei)
+{
   print("Number of equations: " + string(size(ei)));
   
   print("Ring: " + string(r));
@@ -63,13 +67,30 @@ proc solve_equations(list eqs)
 
 list eqs = read_equations();
 
+ideal ei;
 ideal si;
 
 if( size(eqs) > 0 )
 {
-  si = solve_equations(eqs);
+  ei = make_ideal(eqs);
+  si = solve_equations(ei);
   si;
   print("Dimension of solution set: " + string(dim(si)));
+  print("Looking for the coefficients.");
+  matrix T;
+  ideal sm=liftstd(ei,T);
+  sm;
+  int k;
+  write(":w output-m.mathematica","m = " + string(sm))
+  for (k=1; k<=size(eqs); k=k+1) {
+    write(":a output-m.mathematica","f[" + string(k) + "] = " + string(eqs[size(eqs)-k+1]) + ";");
+    write(":a output-m.mathematica","mu[" + string(k) + "] = " + string(T[k,1]) + ";");
+
+    };
+  write(":a output-m.mathematica","fList = Table[f[i], {i, " + string(size(eqs)) + "}];");
+  write(":a output-m.mathematica","muList = Table[mu[i], {i, " + string(size(eqs)) + "}];");
+  write(":a output-m.mathematica","Simplify[Evaluate[fList.muList]]]");
+  print("DONE.");
 }
 else
 {
