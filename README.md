@@ -19,7 +19,7 @@ to obtain the number _m_ in the article. The number _m'_ and proof that the syst
 
 > `Simplify[Import["output-m.mathematica", "Text"]]`
 
-Further information can be found in the article. Please contact us by email with any questions you may have.
+and the likes. Further information can be found in the article. Please contact us by email with any questions you may have.
 ## Authors 
 
 Ülo Reimaa, Tim Van der Linden and Corentin Vienne
