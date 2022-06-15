@@ -11,7 +11,7 @@ The files `generate_equations.singular` and `solve_equations_*.singular` contain
 
 > `Singular -q generate_equations.singular`
 
-to generate the file `equations.singular` which contains the equations. Then run
+to generate the file `equations.txt` which contains the equations. Then run
 
 > `Singular -q solve_equations_m.singular`
 
