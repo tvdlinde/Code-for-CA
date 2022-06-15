@@ -1,191 +1,191 @@
-LL(1)*LL(4)+LL(3)*LR(1)+LL(2)*RL(1)+LL(1)*RR(1),
+aa*ad+ac*ba+ab*ca+aa*da,
 
-LL(2)*LL(4)+LL(3)*LR(2)+LL(2)*RL(2)+LL(1)*RR(2),
+ab*ad+ac*bb+ab*cb+aa*db,
 
-LL(3)*LL(4)+LL(3)*LR(3)+LL(2)*RL(3)+LL(1)*RR(3),
+ac*ad+ac*bc+ab*cc+aa*dc,
 
-LL(4)^2+LL(3)*LR(4)+LL(2)*RL(4)+LL(1)*RR(4)-1,
+ad^2+ac*bd+ab*cd+aa*dd-1,
 
-LR(1)*LR(3)+LL(1)*LR(4)+LR(2)*RL(1)+LR(1)*RR(1),
+ba*bc+aa*bd+bb*ca+ba*da,
 
-LR(2)*LR(3)+LL(2)*LR(4)+LR(2)*RL(2)+LR(1)*RR(2),
+bb*bc+ab*bd+bb*cb+ba*db,
 
-LR(3)^2+LL(3)*LR(4)+LR(2)*RL(3)+LR(1)*RR(3)-1,
+bc^2+ac*bd+bb*cc+ba*dc-1,
 
-LL(4)*LR(4)+LR(3)*LR(4)+LR(2)*RL(4)+LR(1)*RR(4),
+ad*bd+bc*bd+bb*cd+ba*dd,
 
-LL(1)*LL(3)+LL(4)*LR(1)+LL(1)*RL(1)+LL(2)*RR(1)-LR(2),
+aa*ac+ad*ba+aa*ca+ab*da-bb,
 
-LL(2)*LL(3)+LL(4)*LR(2)+LL(1)*RL(2)+LL(2)*RR(2)-LR(1),
+ab*ac+ad*bb+aa*cb+ab*db-ba,
 
-LL(3)^2+LL(4)*LR(3)+LL(1)*RL(3)+LL(2)*RR(3)-LR(4),
+ac^2+ad*bc+aa*cc+ab*dc-bd,
 
-LL(3)*LL(4)+LL(4)*LR(4)+LL(1)*RL(4)+LL(2)*RR(4)-LR(3),
+ac*ad+ad*bd+aa*cd+ab*dd-bc,
 
-LL(1)*LR(3)+LR(1)*LR(4)+LR(1)*RL(1)+LR(2)*RR(1)-LL(2),
+aa*bc+ba*bd+ba*ca+bb*da-ab,
 
-LL(2)*LR(3)+LR(2)*LR(4)+LR(1)*RL(2)+LR(2)*RR(2)-LL(1),
+ab*bc+bb*bd+ba*cb+bb*db-aa,
 
-LL(3)*LR(3)+LR(3)*LR(4)+LR(1)*RL(3)+LR(2)*RR(3)-LL(4),
+ac*bc+bc*bd+ba*cc+bb*dc-ad,
 
-LL(4)*LR(3)+LR(4)^2+LR(1)*RL(4)+LR(2)*RR(4)-LL(3),
+ad*bc+bd^2+ba*cd+bb*dd-ac,
 
-RL(1)*RL(2)+LR(1)*RL(3)+LL(1)*RL(4)+RL(1)*RR(1),
+ca*cb+ba*cc+aa*cd+ca*da,
 
-RL(2)^2+LR(2)*RL(3)+LL(2)*RL(4)+RL(1)*RR(2)-1,
+cb^2+bb*cc+ab*cd+ca*db-1,
 
-LR(3)*RL(3)+RL(2)*RL(3)+LL(3)*RL(4)+RL(1)*RR(3),
+bc*cc+cb*cc+ac*cd+ca*dc,
 
-LR(4)*RL(3)+LL(4)*RL(4)+RL(2)*RL(4)+RL(1)*RR(4),
+bd*cc+ad*cd+cb*cd+ca*dd,
 
-RR(1)^2+RL(1)*RR(2)+LR(1)*RR(3)+LL(1)*RR(4)-1,
+da^2+ca*db+ba*dc+aa*dd-1,
 
-RL(2)*RR(2)+RR(1)*RR(2)+LR(2)*RR(3)+LL(2)*RR(4),
+cb*db+da*db+bb*dc+ab*dd,
 
-RL(3)*RR(2)+LR(3)*RR(3)+RR(1)*RR(3)+LL(3)*RR(4),
+cc*db+bc*dc+da*dc+ac*dd,
 
-RL(4)*RR(2)+LR(4)*RR(3)+LL(4)*RR(4)+RR(1)*RR(4),
+cd*db+bd*dc+ad*dd+da*dd,
 
-RL(1)*RR(1)+RR(1)*RR(2)+LL(1)*RR(3)+LR(1)*RR(4)-RL(2),
+ca*da+da*db+aa*dc+ba*dd-cb,
 
-RL(2)*RR(1)+RR(2)^2+LL(2)*RR(3)+LR(2)*RR(4)-RL(1),
+cb*da+db^2+ab*dc+bb*dd-ca,
 
-RL(3)*RR(1)+LL(3)*RR(3)+RR(2)*RR(3)+LR(3)*RR(4)-RL(4),
+cc*da+ac*dc+db*dc+bc*dd-cd,
 
-RL(4)*RR(1)+LL(4)*RR(3)+LR(4)*RR(4)+RR(2)*RR(4)-RL(3),
+cd*da+ad*dc+bd*dd+db*dd-cc,
 
-RL(1)^2+LL(1)*RL(3)+LR(1)*RL(4)+RL(2)*RR(1)-RR(2),
+ca^2+aa*cc+ba*cd+cb*da-db,
 
-RL(1)*RL(2)+LL(2)*RL(3)+LR(2)*RL(4)+RL(2)*RR(2)-RR(1),
+ca*cb+ab*cc+bb*cd+cb*db-da,
 
-LL(3)*RL(3)+RL(1)*RL(3)+LR(3)*RL(4)+RL(2)*RR(3)-RR(4),
+ac*cc+ca*cc+bc*cd+cb*dc-dd,
 
-LL(4)*RL(3)+LR(4)*RL(4)+RL(1)*RL(4)+RL(2)*RR(4)-RR(3),
+ad*cc+bd*cd+ca*cd+cb*dd-dc,
 
-LR(3)*RL(1)^2+LR(1)^2*RL(3)+LL(1)*LR(3)*RL(3)+LR(1)*RL(1)*RR(1)+LR(1)*RL(4)*RR(1)+RL(2)*RR(1)^2+RL(1)*RL(2)*RR(3)+LL(1)*RL(4)*RR(3)-RL(3)^2-RL(1)*RR(3),
+bc*ca^2+ba^2*cc+aa*bc*cc+ba*ca*da+ba*cd*da+cb*da^2+ca*cb*dc+aa*cd*dc-cc^2-ca*dc,
 
-LR(3)*RL(1)*RL(2)+LR(1)*LR(2)*RL(3)+LL(2)*LR(3)*RL(3)+LR(2)*RL(4)*RR(1)+LR(1)*RL(1)*RR(2)+RL(2)*RR(1)*RR(2)+RL(2)^2*RR(3)+LL(2)*RL(4)*RR(3)-RL(3)*RL(4)-RL(2)*RR(3),
+bc*ca*cb+ba*bb*cc+ab*bc*cc+bb*cd*da+ba*ca*db+cb*da*db+cb^2*dc+ab*cd*dc-cc*cd-cb*dc,
 
-LL(3)*LR(3)*RL(3)+LR(1)*LR(3)*RL(3)+LR(3)*RL(1)*RL(3)+LR(3)*RL(4)*RR(1)+LR(1)*RL(1)*RR(3)+RL(2)*RL(3)*RR(3)+LL(3)*RL(4)*RR(3)+RL(2)*RR(1)*RR(3)-RL(1)*RL(3)-RL(1)*RR(1),
+ac*bc*cc+ba*bc*cc+bc*ca*cc+bc*cd*da+ba*ca*dc+cb*cc*dc+ac*cd*dc+cb*da*dc-ca*cc-ca*da,
 
-LL(4)*LR(3)*RL(3)+LR(1)*LR(4)*RL(3)+LR(3)*RL(1)*RL(4)+LR(4)*RL(4)*RR(1)+LL(4)*RL(4)*RR(3)+RL(2)*RL(4)*RR(3)+LR(1)*RL(1)*RR(4)+RL(2)*RR(1)*RR(4)-RL(1)*RL(4)-RL(2)*RR(1),
+ad*bc*cc+ba*bd*cc+bc*ca*cd+bd*cd*da+ad*cd*dc+cb*cd*dc+ba*ca*dd+cb*da*dd-ca*cd-cb*da,
 
-LR(4)*RL(1)^2+LR(1)*LR(2)*RL(3)+LL(1)*LR(4)*RL(3)+LR(2)*RL(1)*RR(1)+LR(1)*RL(4)*RR(2)+RL(2)*RR(1)*RR(2)+RL(1)*RL(2)*RR(4)+LL(1)*RL(4)*RR(4)-RL(3)*RL(4)-RL(1)*RR(4),
+bd*ca^2+ba*bb*cc+aa*bd*cc+bb*ca*da+ba*cd*db+cb*da*db+ca*cb*dd+aa*cd*dd-cc*cd-ca*dd,
 
-LR(4)*RL(1)*RL(2)+LR(2)^2*RL(3)+LL(2)*LR(4)*RL(3)+LR(2)*RL(1)*RR(2)+LR(2)*RL(4)*RR(2)+RL(2)*RR(2)^2+RL(2)^2*RR(4)+LL(2)*RL(4)*RR(4)-RL(4)^2-RL(2)*RR(4),
+bd*ca*cb+bb^2*cc+ab*bd*cc+bb*ca*db+bb*cd*db+cb*db^2+cb^2*dd+ab*cd*dd-cd^2-cb*dd,
 
-LR(2)*LR(3)*RL(3)+LL(3)*LR(4)*RL(3)+LR(4)*RL(1)*RL(3)+LR(3)*RL(4)*RR(2)+LR(2)*RL(1)*RR(3)+RL(2)*RR(2)*RR(3)+RL(2)*RL(3)*RR(4)+LL(3)*RL(4)*RR(4)-RL(2)*RL(3)-RL(1)*RR(2),
+bb*bc*cc+ac*bd*cc+bd*ca*cc+bc*cd*db+bb*ca*dc+cb*db*dc+cb*cc*dd+ac*cd*dd-cb*cc-ca*db,
 
-LL(4)*LR(4)*RL(3)+LR(2)*LR(4)*RL(3)+LR(4)*RL(1)*RL(4)+LR(4)*RL(4)*RR(2)+LR(2)*RL(1)*RR(4)+LL(4)*RL(4)*RR(4)+RL(2)*RL(4)*RR(4)+RL(2)*RR(2)*RR(4)-RL(2)*RL(4)-RL(2)*RR(2),
+ad*bd*cc+bb*bd*cc+bd*ca*cd+bd*cd*db+bb*ca*dd+ad*cd*dd+cb*cd*dd+cb*db*dd-cb*cd-cb*db,
 
-LL(3)*RL(1)^2+LL(1)*LL(3)*RL(3)+LL(1)*LR(1)*RL(3)+RL(1)*RL(2)*RL(3)+LR(1)*RL(1)*RL(4)+LL(1)*RL(3)*RL(4)+LL(1)*RL(1)*RR(1)+RL(1)*RL(2)*RR(1)-RL(3)*RR(3)-RR(1)*RR(3),
+ac*ca^2+aa*ac*cc+aa*ba*cc+ca*cb*cc+ba*ca*cd+aa*cc*cd+aa*ca*da+ca*cb*da-cc*dc-da*dc,
 
-LL(3)*RL(1)*RL(2)+LL(2)*LL(3)*RL(3)+LL(1)*LR(2)*RL(3)+RL(2)^2*RL(3)+LR(2)*RL(1)*RL(4)+LL(2)*RL(3)*RL(4)+LL(1)*RL(1)*RR(2)+RL(1)*RL(2)*RR(2)-RR(2)*RR(3)-RL(3)*RR(4),
+ac*ca*cb+ab*ac*cc+aa*bb*cc+cb^2*cc+bb*ca*cd+ab*cc*cd+aa*ca*db+ca*cb*db-db*dc-cc*dd,
 
-LL(3)^2*RL(3)+LL(1)*LR(3)*RL(3)+LL(3)*RL(1)*RL(3)+RL(2)*RL(3)^2+LR(3)*RL(1)*RL(4)+LL(3)*RL(3)*RL(4)+LL(1)*RL(1)*RR(3)+RL(1)*RL(2)*RR(3)-RR(1)^2-RL(1)*RR(3),
+ac^2*cc+aa*bc*cc+ac*ca*cc+cb*cc^2+bc*ca*cd+ac*cc*cd+aa*ca*dc+ca*cb*dc-da^2-ca*dc,
 
-LL(3)*LL(4)*RL(3)+LL(1)*LR(4)*RL(3)+LL(3)*RL(1)*RL(4)+LR(4)*RL(1)*RL(4)+LL(4)*RL(3)*RL(4)+RL(2)*RL(3)*RL(4)+LL(1)*RL(1)*RR(4)+RL(1)*RL(2)*RR(4)-RR(1)*RR(2)-RL(1)*RR(4),
+ac*ad*cc+aa*bd*cc+ac*ca*cd+bd*ca*cd+ad*cc*cd+cb*cc*cd+aa*ca*dd+ca*cb*dd-da*db-ca*dd,
 
-LL(4)*RL(1)^2+LL(1)*LL(4)*RL(3)+LL(2)*LR(1)*RL(3)+LR(1)*RL(2)*RL(4)+RL(1)*RL(2)*RL(4)+LL(1)*RL(4)^2+LL(2)*RL(1)*RR(1)+RL(2)^2*RR(1)-RL(4)*RR(3)-RR(1)*RR(4),
+ad*ca^2+aa*ad*cc+ab*ba*cc+ba*cb*cd+ca*cb*cd+aa*cd^2+ab*ca*da+cb^2*da-cd*dc-da*dd,
 
-LL(4)*RL(1)*RL(2)+LL(2)*LL(4)*RL(3)+LL(2)*LR(2)*RL(3)+LR(2)*RL(2)*RL(4)+RL(2)^2*RL(4)+LL(2)*RL(4)^2+LL(2)*RL(1)*RR(2)+RL(2)^2*RR(2)-RL(4)*RR(4)-RR(2)*RR(4),
+ad*ca*cb+ab*ad*cc+ab*bb*cc+bb*cb*cd+cb^2*cd+ab*cd^2+ab*ca*db+cb^2*db-cd*dd-db*dd,
 
-LL(3)*LL(4)*RL(3)+LL(2)*LR(3)*RL(3)+LL(4)*RL(1)*RL(3)+LR(3)*RL(2)*RL(4)+RL(2)*RL(3)*RL(4)+LL(3)*RL(4)^2+LL(2)*RL(1)*RR(3)+RL(2)^2*RR(3)-RR(1)*RR(2)-RL(2)*RR(3),
+ac*ad*cc+ab*bc*cc+ad*ca*cc+bc*cb*cd+cb*cc*cd+ac*cd^2+ab*ca*dc+cb^2*dc-da*db-cb*dc,
 
-LL(4)^2*RL(3)+LL(2)*LR(4)*RL(3)+LL(4)*RL(1)*RL(4)+LR(4)*RL(2)*RL(4)+LL(4)*RL(4)^2+RL(2)*RL(4)^2+LL(2)*RL(1)*RR(4)+RL(2)^2*RR(4)-RR(2)^2-RL(2)*RR(4),
+ad^2*cc+ab*bd*cc+ad*ca*cd+bd*cb*cd+ad*cd^2+cb*cd^2+ab*ca*dd+cb^2*dd-db^2-cb*dd,
 
-LL(3)*RL(1)*RR(1)+LL(1)*RR(1)^2+RL(1)*RL(3)*RR(2)+RL(1)*RR(1)*RR(2)+LL(1)*LL(3)*RR(3)+LL(1)*LR(1)*RR(3)+LR(1)*RL(1)*RR(4)+LL(1)*RL(3)*RR(4)-LR(3)*RL(3)-LR(1)*RR(3),
+ac*ca*da+aa*da^2+ca*cc*db+ca*da*db+aa*ac*dc+aa*ba*dc+ba*ca*dd+aa*cc*dd-bc*cc-ba*dc,
 
-LL(3)*RL(2)*RR(1)+RL(2)*RL(3)*RR(2)+LL(1)*RR(1)*RR(2)+RL(1)*RR(2)^2+LL(2)*LL(3)*RR(3)+LL(1)*LR(2)*RR(3)+LR(2)*RL(1)*RR(4)+LL(2)*RL(3)*RR(4)-LR(4)*RL(3)-LR(2)*RR(3),
+ac*cb*da+cb*cc*db+aa*da*db+ca*db^2+ab*ac*dc+aa*bb*dc+bb*ca*dd+ab*cc*dd-bd*cc-bb*dc,
 
-LL(3)*RL(3)*RR(1)+RL(3)^2*RR(2)+LL(3)^2*RR(3)+LL(1)*LR(3)*RR(3)+LL(1)*RR(1)*RR(3)+RL(1)*RR(2)*RR(3)+LR(3)*RL(1)*RR(4)+LL(3)*RL(3)*RR(4)-LR(3)*RL(1)-LR(1)*RR(1),
+ac*cc*da+cc^2*db+ac^2*dc+aa*bc*dc+aa*da*dc+ca*db*dc+bc*ca*dd+ac*cc*dd-bc*ca-ba*da,
 
-LL(3)*RL(4)*RR(1)+RL(3)*RL(4)*RR(2)+LL(3)*LL(4)*RR(3)+LL(1)*LR(4)*RR(3)+LR(4)*RL(1)*RR(4)+LL(4)*RL(3)*RR(4)+LL(1)*RR(1)*RR(4)+RL(1)*RR(2)*RR(4)-LR(4)*RL(1)-LR(2)*RR(1),
+ac*cd*da+cc*cd*db+ac*ad*dc+aa*bd*dc+bd*ca*dd+ad*cc*dd+aa*da*dd+ca*db*dd-bd*ca-bb*da,
 
-LL(4)*RL(1)*RR(1)+LL(2)*RR(1)^2+RL(1)*RL(4)*RR(2)+RL(2)*RR(1)*RR(2)+LL(1)*LL(4)*RR(3)+LL(2)*LR(1)*RR(3)+LR(1)*RL(2)*RR(4)+LL(1)*RL(4)*RR(4)-LR(3)*RL(4)-LR(1)*RR(4),
+ad*ca*da+ab*da^2+ca*cd*db+cb*da*db+aa*ad*dc+ab*ba*dc+ba*cb*dd+aa*cd*dd-bc*cd-ba*dd,
 
-LL(4)*RL(2)*RR(1)+RL(2)*RL(4)*RR(2)+LL(2)*RR(1)*RR(2)+RL(2)*RR(2)^2+LL(2)*LL(4)*RR(3)+LL(2)*LR(2)*RR(3)+LR(2)*RL(2)*RR(4)+LL(2)*RL(4)*RR(4)-LR(4)*RL(4)-LR(2)*RR(4),
+ad*cb*da+cb*cd*db+ab*da*db+cb*db^2+ab*ad*dc+ab*bb*dc+bb*cb*dd+ab*cd*dd-bd*cd-bb*dd,
 
-LL(4)*RL(3)*RR(1)+RL(3)*RL(4)*RR(2)+LL(3)*LL(4)*RR(3)+LL(2)*LR(3)*RR(3)+LL(2)*RR(1)*RR(3)+RL(2)*RR(2)*RR(3)+LR(3)*RL(2)*RR(4)+LL(3)*RL(4)*RR(4)-LR(3)*RL(2)-LR(1)*RR(2),
+ad*cc*da+cc*cd*db+ac*ad*dc+ab*bc*dc+ab*da*dc+cb*db*dc+bc*cb*dd+ac*cd*dd-bc*cb-ba*db,
 
-LL(4)*RL(4)*RR(1)+RL(4)^2*RR(2)+LL(4)^2*RR(3)+LL(2)*LR(4)*RR(3)+LR(4)*RL(2)*RR(4)+LL(4)*RL(4)*RR(4)+LL(2)*RR(1)*RR(4)+RL(2)*RR(2)*RR(4)-LR(4)*RL(2)-LR(2)*RR(2),
+ad*cd*da+cd^2*db+ad^2*dc+ab*bd*dc+bd*cb*dd+ad*cd*dd+ab*da*dd+cb*db*dd-bd*cb-bb*db,
 
-LR(3)*RL(1)*RR(1)+LR(1)*RR(1)^2+RR(1)^2*RR(2)+LR(1)^2*RR(3)+LL(1)*LR(3)*RR(3)+RL(1)*RR(2)*RR(3)+LR(1)*RR(1)*RR(4)+LL(1)*RR(3)*RR(4)-LL(3)*RL(3)-LL(1)*RR(3),
+bc*ca*da+ba*da^2+da^2*db+ba^2*dc+aa*bc*dc+ca*db*dc+ba*da*dd+aa*dc*dd-ac*cc-aa*dc,
 
-LR(3)*RL(2)*RR(1)+LR(1)*RR(1)*RR(2)+RR(1)*RR(2)^2+LR(1)*LR(2)*RR(3)+LL(2)*LR(3)*RR(3)+RL(2)*RR(2)*RR(3)+LR(2)*RR(1)*RR(4)+LL(2)*RR(3)*RR(4)-LL(4)*RL(3)-LL(2)*RR(3),
+bc*cb*da+ba*da*db+da*db^2+ba*bb*dc+ab*bc*dc+cb*db*dc+bb*da*dd+ab*dc*dd-ad*cc-ab*dc,
 
-LR(3)*RL(3)*RR(1)+LL(3)*LR(3)*RR(3)+LR(1)*LR(3)*RR(3)+LR(1)*RR(1)*RR(3)+RL(3)*RR(2)*RR(3)+RR(1)*RR(2)*RR(3)+LR(3)*RR(1)*RR(4)+LL(3)*RR(3)*RR(4)-LL(3)*RL(1)-LL(1)*RR(1),
+bc*cc*da+ac*bc*dc+ba*bc*dc+ba*da*dc+cc*db*dc+da*db*dc+bc*da*dd+ac*dc*dd-ac*ca-aa*da,
 
-LR(3)*RL(4)*RR(1)+LL(4)*LR(3)*RR(3)+LR(1)*LR(4)*RR(3)+RL(4)*RR(2)*RR(3)+LR(1)*RR(1)*RR(4)+LR(4)*RR(1)*RR(4)+RR(1)*RR(2)*RR(4)+LL(4)*RR(3)*RR(4)-LL(4)*RL(1)-LL(2)*RR(1),
+bc*cd*da+ad*bc*dc+ba*bd*dc+cd*db*dc+ba*da*dd+bd*da*dd+da*db*dd+ad*dc*dd-ad*ca-ab*da,
 
-LR(4)*RL(1)*RR(1)+LR(2)*RR(1)^2+RR(1)*RR(2)^2+LR(1)*LR(2)*RR(3)+LL(1)*LR(4)*RR(3)+LR(1)*RR(2)*RR(4)+RL(1)*RR(2)*RR(4)+LL(1)*RR(4)^2-LL(3)*RL(4)-LL(1)*RR(4),
+bd*ca*da+bb*da^2+da*db^2+ba*bb*dc+aa*bd*dc+ba*db*dd+ca*db*dd+aa*dd^2-ac*cd-aa*dd,
 
-LR(4)*RL(2)*RR(1)+LR(2)*RR(1)*RR(2)+RR(2)^3+LR(2)^2*RR(3)+LL(2)*LR(4)*RR(3)+LR(2)*RR(2)*RR(4)+RL(2)*RR(2)*RR(4)+LL(2)*RR(4)^2-LL(4)*RL(4)-LL(2)*RR(4),
+bd*cb*da+bb*da*db+db^3+bb^2*dc+ab*bd*dc+bb*db*dd+cb*db*dd+ab*dd^2-ad*cd-ab*dd,
 
-LR(4)*RL(3)*RR(1)+LR(2)*LR(3)*RR(3)+LL(3)*LR(4)*RR(3)+LR(2)*RR(1)*RR(3)+RR(2)^2*RR(3)+LR(3)*RR(2)*RR(4)+RL(3)*RR(2)*RR(4)+LL(3)*RR(4)^2-LL(3)*RL(2)-LL(1)*RR(2),
+bd*cc*da+bb*bc*dc+ac*bd*dc+bb*da*dc+db^2*dc+bc*db*dd+cc*db*dd+ac*dd^2-ac*cb-aa*db,
 
-LR(4)*RL(4)*RR(1)+LL(4)*LR(4)*RR(3)+LR(2)*LR(4)*RR(3)+LR(2)*RR(1)*RR(4)+LR(4)*RR(2)*RR(4)+RL(4)*RR(2)*RR(4)+RR(2)^2*RR(4)+LL(4)*RR(4)^2-LL(4)*RL(2)-LL(2)*RR(2),
+bd*cd*da+ad*bd*dc+bb*bd*dc+bb*da*dd+bd*db*dd+cd*db*dd+db^2*dd+ad*dd^2-ad*cb-ab*db,
 
-LL(1)*LL(3)^2+LL(1)*LL(3)*LR(1)+LL(1)*LL(3)*RL(1)+LL(4)*LR(1)*RL(1)+LL(1)*LL(4)*RL(3)+LL(2)*RL(1)*RL(3)+LL(1)^2*RR(1)+LL(2)*RL(1)*RR(1)-LR(3)*RR(1)-LL(3)*RR(3),
+aa*ac^2+aa*ac*ba+aa*ac*ca+ad*ba*ca+aa*ad*cc+ab*ca*cc+aa^2*da+ab*ca*da-bc*da-ac*dc,
 
-LL(2)*LL(3)^2+LL(1)*LL(3)*LR(2)+LL(4)*LR(2)*RL(1)+LL(1)*LL(3)*RL(2)+LL(2)*LL(4)*RL(3)+LL(2)*RL(2)*RL(3)+LL(1)^2*RR(2)+LL(2)*RL(1)*RR(2)-LR(3)*RR(2)-LL(3)*RR(4),
+ab*ac^2+aa*ac*bb+ad*bb*ca+aa*ac*cb+ab*ad*cc+ab*cb*cc+aa^2*db+ab*ca*db-bc*db-ac*dd,
 
-LL(3)^3+LL(1)*LL(3)*LR(3)+LL(4)*LR(3)*RL(1)+LL(1)*LL(3)*RL(3)+LL(3)*LL(4)*RL(3)+LL(2)*RL(3)^2+LL(1)^2*RR(3)+LL(2)*RL(1)*RR(3)-LR(1)*RR(1)-LL(1)*RR(3),
+ac^3+aa*ac*bc+ad*bc*ca+aa*ac*cc+ac*ad*cc+ab*cc^2+aa^2*dc+ab*ca*dc-ba*da-aa*dc,
 
-LL(3)^2*LL(4)+LL(1)*LL(3)*LR(4)+LL(4)*LR(4)*RL(1)+LL(4)^2*RL(3)+LL(1)*LL(3)*RL(4)+LL(2)*RL(3)*RL(4)+LL(1)^2*RR(4)+LL(2)*RL(1)*RR(4)-LR(1)*RR(2)-LL(1)*RR(4),
+ac^2*ad+aa*ac*bd+ad*bd*ca+ad^2*cc+aa*ac*cd+ab*cc*cd+aa^2*dd+ab*ca*dd-ba*db-aa*dd,
 
-LL(1)*LL(3)*LL(4)+LL(2)*LL(3)*LR(1)+LL(1)*LL(4)*RL(1)+LL(4)*LR(1)*RL(2)+LL(1)*LL(4)*RL(4)+LL(2)*RL(1)*RL(4)+LL(1)*LL(2)*RR(1)+LL(2)*RL(2)*RR(1)-LR(4)*RR(1)-LL(4)*RR(3),
+aa*ac*ad+ab*ac*ba+aa*ad*ca+ad*ba*cb+aa*ad*cd+ab*ca*cd+aa*ab*da+ab*cb*da-bd*da-ad*dc,
 
-LL(2)*LL(3)*LL(4)+LL(2)*LL(3)*LR(2)+LL(1)*LL(4)*RL(2)+LL(4)*LR(2)*RL(2)+LL(2)*LL(4)*RL(4)+LL(2)*RL(2)*RL(4)+LL(1)*LL(2)*RR(2)+LL(2)*RL(2)*RR(2)-LR(4)*RR(2)-LL(4)*RR(4),
+ab*ac*ad+ab*ac*bb+aa*ad*cb+ad*bb*cb+ab*ad*cd+ab*cb*cd+aa*ab*db+ab*cb*db-bd*db-ad*dd,
 
-LL(3)^2*LL(4)+LL(2)*LL(3)*LR(3)+LL(4)*LR(3)*RL(2)+LL(1)*LL(4)*RL(3)+LL(3)*LL(4)*RL(4)+LL(2)*RL(3)*RL(4)+LL(1)*LL(2)*RR(3)+LL(2)*RL(2)*RR(3)-LR(2)*RR(1)-LL(2)*RR(3),
+ac^2*ad+ab*ac*bc+ad*bc*cb+aa*ad*cc+ac*ad*cd+ab*cc*cd+aa*ab*dc+ab*cb*dc-bb*da-ab*dc,
 
-LL(3)*LL(4)^2+LL(2)*LL(3)*LR(4)+LL(4)*LR(4)*RL(2)+LL(1)*LL(4)*RL(4)+LL(4)^2*RL(4)+LL(2)*RL(4)^2+LL(1)*LL(2)*RR(4)+LL(2)*RL(2)*RR(4)-LR(2)*RR(2)-LL(2)*RR(4),
+ac*ad^2+ab*ac*bd+ad*bd*cb+aa*ad*cd+ad^2*cd+ab*cd^2+aa*ab*dd+ab*cb*dd-bb*db-ab*dd,
 
-LL(3)*LR(1)^2+LL(1)*LL(3)*LR(3)+LL(1)*LR(3)*RL(1)+LL(1)*LR(1)*RR(1)+LL(4)*LR(1)*RR(1)+LL(2)*RR(1)^2+LL(1)*LL(4)*RR(3)+LL(2)*RL(1)*RR(3)-LR(3)*RL(1)-LL(3)*RL(3),
+ac*ba^2+aa*ac*bc+aa*bc*ca+aa*ba*da+ad*ba*da+ab*da^2+aa*ad*dc+ab*ca*dc-bc*ca-ac*cc,
 
-LL(3)*LR(1)*LR(2)+LL(2)*LL(3)*LR(3)+LL(1)*LR(3)*RL(2)+LL(4)*LR(2)*RR(1)+LL(1)*LR(1)*RR(2)+LL(2)*RR(1)*RR(2)+LL(2)*LL(4)*RR(3)+LL(2)*RL(2)*RR(3)-LR(3)*RL(2)-LL(3)*RL(4),
+ac*ba*bb+ab*ac*bc+aa*bc*cb+ad*bb*da+aa*ba*db+ab*da*db+ab*ad*dc+ab*cb*dc-bc*cb-ac*cd,
 
-LL(3)^2*LR(3)+LL(3)*LR(1)*LR(3)+LL(1)*LR(3)*RL(3)+LL(4)*LR(3)*RR(1)+LL(3)*LL(4)*RR(3)+LL(1)*LR(1)*RR(3)+LL(2)*RL(3)*RR(3)+LL(2)*RR(1)*RR(3)-LR(1)*RL(1)-LL(1)*RL(3),
+ac^2*bc+ac*ba*bc+aa*bc*cc+ad*bc*da+ac*ad*dc+aa*ba*dc+ab*cc*dc+ab*da*dc-ba*ca-aa*cc,
 
-LL(3)*LL(4)*LR(3)+LL(3)*LR(1)*LR(4)+LL(1)*LR(3)*RL(4)+LL(4)*LR(4)*RR(1)+LL(4)^2*RR(3)+LL(2)*RL(4)*RR(3)+LL(1)*LR(1)*RR(4)+LL(2)*RR(1)*RR(4)-LR(1)*RL(2)-LL(1)*RL(4),
+ac*ad*bc+ac*ba*bd+aa*bc*cd+ad*bd*da+ad^2*dc+ab*cd*dc+aa*ba*dd+ab*da*dd-ba*cb-aa*cd,
 
-LL(3)*LR(1)*LR(2)+LL(1)*LL(3)*LR(4)+LL(1)*LR(4)*RL(1)+LL(1)*LR(2)*RR(1)+LL(4)*LR(1)*RR(2)+LL(2)*RR(1)*RR(2)+LL(1)*LL(4)*RR(4)+LL(2)*RL(1)*RR(4)-LR(4)*RL(1)-LL(4)*RL(3),
+ac*ba*bb+aa*ac*bd+aa*bd*ca+aa*bb*da+ad*ba*db+ab*da*db+aa*ad*dd+ab*ca*dd-bd*ca-ad*cc,
 
-LL(3)*LR(2)^2+LL(2)*LL(3)*LR(4)+LL(1)*LR(4)*RL(2)+LL(1)*LR(2)*RR(2)+LL(4)*LR(2)*RR(2)+LL(2)*RR(2)^2+LL(2)*LL(4)*RR(4)+LL(2)*RL(2)*RR(4)-LR(4)*RL(2)-LL(4)*RL(4),
+ac*bb^2+ab*ac*bd+aa*bd*cb+aa*bb*db+ad*bb*db+ab*db^2+ab*ad*dd+ab*cb*dd-bd*cb-ad*cd,
 
-LL(3)*LR(2)*LR(3)+LL(3)^2*LR(4)+LL(1)*LR(4)*RL(3)+LL(4)*LR(3)*RR(2)+LL(1)*LR(2)*RR(3)+LL(2)*RR(2)*RR(3)+LL(3)*LL(4)*RR(4)+LL(2)*RL(3)*RR(4)-LR(2)*RL(1)-LL(2)*RL(3),
+ac*bb*bc+ac^2*bd+aa*bd*cc+ad*bc*db+aa*bb*dc+ab*db*dc+ac*ad*dd+ab*cc*dd-bb*ca-ab*cc,
 
-LL(3)*LL(4)*LR(4)+LL(3)*LR(2)*LR(4)+LL(1)*LR(4)*RL(4)+LL(4)*LR(4)*RR(2)+LL(4)^2*RR(4)+LL(1)*LR(2)*RR(4)+LL(2)*RL(4)*RR(4)+LL(2)*RR(2)*RR(4)-LR(2)*RL(2)-LL(2)*RL(4),
+ac*ad*bd+ac*bb*bd+aa*bd*cd+ad*bd*db+ad^2*dd+aa*bb*dd+ab*cd*dd+ab*db*dd-bb*cb-ab*cd,
 
-LL(1)*LL(3)*LR(3)+LL(1)*LR(1)*LR(3)+LL(3)*LR(1)*RL(1)+LR(1)*LR(4)*RL(1)+LL(1)*LR(4)*RL(3)+LR(2)*RL(1)*RL(3)+LL(1)*LR(1)*RR(1)+LR(2)*RL(1)*RR(1)-LL(3)*LR(3)-LR(1)*LR(3),
+aa*ac*bc+aa*ba*bc+ac*ba*ca+ba*bd*ca+aa*bd*cc+bb*ca*cc+aa*ba*da+bb*ca*da-ac*bc-ba*bc,
 
-LL(2)*LL(3)*LR(3)+LL(1)*LR(2)*LR(3)+LR(2)*LR(4)*RL(1)+LL(3)*LR(1)*RL(2)+LL(2)*LR(4)*RL(3)+LR(2)*RL(2)*RL(3)+LL(1)*LR(1)*RR(2)+LR(2)*RL(1)*RR(2)-LR(2)*LR(3)-LL(3)*LR(4),
+ab*ac*bc+aa*bb*bc+bb*bd*ca+ac*ba*cb+ab*bd*cc+bb*cb*cc+aa*ba*db+bb*ca*db-bb*bc-ac*bd,
 
-LL(3)^2*LR(3)+LL(1)*LR(3)^2+LR(3)*LR(4)*RL(1)+LL(3)*LR(1)*RL(3)+LL(3)*LR(4)*RL(3)+LR(2)*RL(3)^2+LL(1)*LR(1)*RR(3)+LR(2)*RL(1)*RR(3)-LR(1)^2-LL(1)*LR(3),
+ac^2*bc+aa*bc^2+bc*bd*ca+ac*ba*cc+ac*bd*cc+bb*cc^2+aa*ba*dc+bb*ca*dc-ba^2-aa*bc,
 
-LL(3)*LL(4)*LR(3)+LL(1)*LR(3)*LR(4)+LR(4)^2*RL(1)+LL(4)*LR(4)*RL(3)+LL(3)*LR(1)*RL(4)+LR(2)*RL(3)*RL(4)+LL(1)*LR(1)*RR(4)+LR(2)*RL(1)*RR(4)-LR(1)*LR(2)-LL(1)*LR(4),
+ac*ad*bc+aa*bc*bd+bd^2*ca+ad*bd*cc+ac*ba*cd+bb*cc*cd+aa*ba*dd+bb*ca*dd-ba*bb-aa*bd,
 
-LL(1)*LL(4)*LR(3)+LL(2)*LR(1)*LR(3)+LL(4)*LR(1)*RL(1)+LR(1)*LR(4)*RL(2)+LL(1)*LR(4)*RL(4)+LR(2)*RL(1)*RL(4)+LL(2)*LR(1)*RR(1)+LR(2)*RL(2)*RR(1)-LL(4)*LR(3)-LR(1)*LR(4),
+aa*ad*bc+ab*ba*bc+ad*ba*ca+ba*bd*cb+aa*bd*cd+bb*ca*cd+ab*ba*da+bb*cb*da-ad*bc-ba*bd,
 
-LL(2)*LL(4)*LR(3)+LL(2)*LR(2)*LR(3)+LL(4)*LR(1)*RL(2)+LR(2)*LR(4)*RL(2)+LL(2)*LR(4)*RL(4)+LR(2)*RL(2)*RL(4)+LL(2)*LR(1)*RR(2)+LR(2)*RL(2)*RR(2)-LL(4)*LR(4)-LR(2)*LR(4),
+ab*ad*bc+ab*bb*bc+ad*ba*cb+bb*bd*cb+ab*bd*cd+bb*cb*cd+ab*ba*db+bb*cb*db-ad*bd-bb*bd,
 
-LL(3)*LL(4)*LR(3)+LL(2)*LR(3)^2+LR(3)*LR(4)*RL(2)+LL(4)*LR(1)*RL(3)+LL(3)*LR(4)*RL(4)+LR(2)*RL(3)*RL(4)+LL(2)*LR(1)*RR(3)+LR(2)*RL(2)*RR(3)-LR(1)*LR(2)-LL(2)*LR(3),
+ac*ad*bc+ab*bc^2+bc*bd*cb+ad*ba*cc+ac*bd*cd+bb*cc*cd+ab*ba*dc+bb*cb*dc-ba*bb-ab*bc,
 
-LL(4)^2*LR(3)+LL(2)*LR(3)*LR(4)+LR(4)^2*RL(2)+LL(4)*LR(1)*RL(4)+LL(4)*LR(4)*RL(4)+LR(2)*RL(4)^2+LL(2)*LR(1)*RR(4)+LR(2)*RL(2)*RR(4)-LR(2)^2-LL(2)*LR(4),
+ad^2*bc+ab*bc*bd+bd^2*cb+ad*ba*cd+ad*bd*cd+bb*cd^2+ab*ba*dd+bb*cb*dd-bb^2-ab*bd,
 
-LR(1)^2*LR(3)+LL(1)*LR(3)^2+LR(1)*LR(3)*RL(1)+LR(1)^2*RR(1)+LR(1)*LR(4)*RR(1)+LR(2)*RR(1)^2+LL(1)*LR(4)*RR(3)+LR(2)*RL(1)*RR(3)-LL(3)^2-LL(1)*LR(3),
+ba^2*bc+aa*bc^2+ba*bc*ca+ba^2*da+ba*bd*da+bb*da^2+aa*bd*dc+bb*ca*dc-ac^2-aa*bc,
 
-LR(1)*LR(2)*LR(3)+LL(2)*LR(3)^2+LR(1)*LR(3)*RL(2)+LR(2)*LR(4)*RR(1)+LR(1)^2*RR(2)+LR(2)*RR(1)*RR(2)+LL(2)*LR(4)*RR(3)+LR(2)*RL(2)*RR(3)-LL(3)*LL(4)-LL(2)*LR(3),
+ba*bb*bc+ab*bc^2+ba*bc*cb+bb*bd*da+ba^2*db+bb*da*db+ab*bd*dc+bb*cb*dc-ac*ad-ab*bc,
 
-LL(3)*LR(3)^2+LR(1)*LR(3)^2+LR(1)*LR(3)*RL(3)+LR(3)*LR(4)*RR(1)+LR(1)^2*RR(3)+LL(3)*LR(4)*RR(3)+LR(2)*RL(3)*RR(3)+LR(2)*RR(1)*RR(3)-LL(1)*LL(3)-LL(1)*LR(1),
+ac*bc^2+ba*bc^2+ba*bc*cc+bc*bd*da+ba^2*dc+ac*bd*dc+bb*cc*dc+bb*da*dc-aa*ac-aa*ba,
 
-LL(4)*LR(3)^2+LR(1)*LR(3)*LR(4)+LR(1)*LR(3)*RL(4)+LR(4)^2*RR(1)+LL(4)*LR(4)*RR(3)+LR(2)*RL(4)*RR(3)+LR(1)^2*RR(4)+LR(2)*RR(1)*RR(4)-LL(1)*LL(4)-LL(2)*LR(1),
+ad*bc^2+ba*bc*bd+ba*bc*cd+bd^2*da+ad*bd*dc+bb*cd*dc+ba^2*dd+bb*da*dd-aa*ad-ab*ba,
 
-LR(1)*LR(2)*LR(3)+LL(1)*LR(3)*LR(4)+LR(1)*LR(4)*RL(1)+LR(1)*LR(2)*RR(1)+LR(1)*LR(4)*RR(2)+LR(2)*RR(1)*RR(2)+LL(1)*LR(4)*RR(4)+LR(2)*RL(1)*RR(4)-LL(3)*LL(4)-LL(1)*LR(4),
+ba*bb*bc+aa*bc*bd+ba*bd*ca+ba*bb*da+ba*bd*db+bb*da*db+aa*bd*dd+bb*ca*dd-ac*ad-aa*bd,
 
-LR(2)^2*LR(3)+LL(2)*LR(3)*LR(4)+LR(1)*LR(4)*RL(2)+LR(1)*LR(2)*RR(2)+LR(2)*LR(4)*RR(2)+LR(2)*RR(2)^2+LL(2)*LR(4)*RR(4)+LR(2)*RL(2)*RR(4)-LL(4)^2-LL(2)*LR(4),
+bb^2*bc+ab*bc*bd+ba*bd*cb+ba*bb*db+bb*bd*db+bb*db^2+ab*bd*dd+bb*cb*dd-ad^2-ab*bd,
 
-LR(2)*LR(3)^2+LL(3)*LR(3)*LR(4)+LR(1)*LR(4)*RL(3)+LR(3)*LR(4)*RR(2)+LR(1)*LR(2)*RR(3)+LR(2)*RR(2)*RR(3)+LL(3)*LR(4)*RR(4)+LR(2)*RL(3)*RR(4)-LL(2)*LL(3)-LL(1)*LR(2),
+bb*bc^2+ac*bc*bd+ba*bd*cc+bc*bd*db+ba*bb*dc+bb*db*dc+ac*bd*dd+bb*cc*dd-ab*ac-aa*bb,
 
-LL(4)*LR(3)*LR(4)+LR(2)*LR(3)*LR(4)+LR(1)*LR(4)*RL(4)+LR(4)^2*RR(2)+LR(1)*LR(2)*RR(4)+LL(4)*LR(4)*RR(4)+LR(2)*RL(4)*RR(4)+LR(2)*RR(2)*RR(4)-LL(2)*LL(4)-LL(2)*LR(2)
+ad*bc*bd+bb*bc*bd+ba*bd*cd+bd^2*db+ba*bb*dd+ad*bd*dd+bb*cd*dd+bb*db*dd-ab*ad-ab*bb
