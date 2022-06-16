@@ -25,7 +25,4 @@ Icon?
 *.djvu
 *.zip
 *.dvi
-
-
-
-
+*.sh
