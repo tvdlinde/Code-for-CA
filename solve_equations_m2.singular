@@ -89,7 +89,7 @@ if( size(eqs) > 0 )
     };
   write(":a output-m2.mathematica","fList = Table[f[i], {i, " + string(size(eqs)) + "}];");
   write(":a output-m2.mathematica","muList = Table[mu[i], {i, " + string(size(eqs)) + "}];");
-  write(":a output-m2.mathematica","PolynomialMod[[Evaluate[fList.muList]],2]");
+  write(":a output-m2.mathematica","PolynomialMod[Evaluate[fList.muList],2]");
   print("DONE.");
 }
 else
