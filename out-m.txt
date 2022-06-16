@@ -1,7 +1,7 @@
 Number of equations: 96
 Ring: (QQ),(aa,ab,ac,ad,ba,bb,bc,bd,ca,cb,cc,cd,da,db,dc,dd),(dp(16),C)
 SOLVING EQUATIONS
-DONE (time taken: 58 seconds)
+DONE (time taken: 59 seconds)
 si[1]=1
 Dimension of solution set: -1
 Looking for the coefficients.
