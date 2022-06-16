@@ -1,0 +1,44 @@
+Singular for x86_64-Linux version 4.2.1 (4210, 64 bit) Aug 24 2021 10:28:45
+with
+	GMP(6.1.2),FLINT(2.8.0),
+	omalloc,fgets,Plural,vspace,DBM,
+	dynamic modules,OM_NDEBUG,SING_NDEBUG,
+	CC:OPTIMIZE,GenericAdd,TableMult,no invTable,
+	eigenvalues,Gauss-Manin system,random=1655369260
+built-in modules: {}
+AC_CONFIGURE_ARGS =  '--with-flint=/home/ucl/theocat/tvdlinde/Singular' '--prefix=/home/ucl/theocat/tvdlinde/Singular' --enable-omalloc  OMALLOC_LIBS='/home/ucl/theocat/tvdlinde/src/Singular/omalloc/libomalloc.la' OMALLOC_INCLUDES='-I/home/ucl/theocat/tvdlinde/src/Singular' --with-Singular RESOURCES_LIBS='/home/ucl/theocat/tvdlinde/src/Singular/resources/libsingular_resources.la' RESOURCES_INCLUDES='-I/home/ucl/theocat/tvdlinde/src/Singular ' FACTORY_LIBS='/home/ucl/theocat/tvdlinde/src/Singular/factory/libfactory.la' FACTORY_INCLUDES='-I/home/ucl/theocat/tvdlinde/src/Singular -I/home/ucl/theocat/tvdlinde/src/Singular/factory -I/home/ucl/theocat/tvdlinde/src/Singular/factory/include',
+CC = gcc,FLAGS :  -g -O2  -pipe -fno-common -g0 -O3 -Wno-unused-function -Wno-trigraphs -Wno-unused-parameter -Wunknown-pragmas -Wno-unused-variable -fomit-frame-pointer -fwrapv -fvisibility=default -finline-functions -fno-exceptions -funroll-loops -pthread -pthread,
+CXX = g++,FLAGS :  -pipe -fno-common -g0 -O3 -Wno-unused-function -Wno-trigraphs -Wno-unused-parameter -Wunknown-pragmas -Wno-unused-variable -fomit-frame-pointer -fwrapv -fvisibility=default -finline-functions -fno-exceptions -fno-threadsafe-statics -fno-enforce-eh-specs -fconserve-space -funroll-loops -fno-rtti -fno-delete-null-pointer-checks -pthread,
+DEFS : ,CPPFLAGS : ,
+LDFLAGS :  -pipe -fno-common -g0 -O3 -Wno-unused-function -Wno-trigraphs -Wno-unused-parameter -Wunknown-pragmas -Wno-unused-variable -fomit-frame-pointer -fwrapv -fvisibility=default -finline-functions -fno-exceptions -funroll-loops  -rdynamic -Wl,-undefined,dynamic_lookup,LIBS : -lmpfr  -lgmp -lrt -lpthread   (ver: 8.3.0)
+argv[0]   :	/home/ucl/theocat/tvdlinde/Singular/bin/Singular
+SearchPath:	/home/ucl/theocat/tvdlinde/Singular/bin/../share/singular/LIB:/home/ucl/theocat/tvdlinde/Singular/bin/../share/factory:/home/ucl/theocat/tvdlinde/Singular/bin/../libexec/singular/MOD:/home/ucl/theocat/tvdlinde/Singular/libexec/singular/MOD:/home/ucl/theocat/tvdlinde/Singular/bin:/home/ucl/theocat/tvdlinde/Singular/bin/..
+Singular  :	/home/ucl/theocat/tvdlinde/Singular/bin/Singular
+BinDir    :	/home/ucl/theocat/tvdlinde/Singular/bin
+ProcDir   :	/home/ucl/theocat/tvdlinde/Singular/bin/..:/home/ucl/theocat/tvdlinde/Singular/bin/../libexec/singular/MOD:/home/ucl/theocat/tvdlinde/Singular/libexec/singular/MOD
+RootDir   :	/home/ucl/theocat/tvdlinde/Singular/bin/..
+DataDir   :	/home/ucl/theocat/tvdlinde/Singular/bin/../share
+DefaultDir:	/home/ucl/theocat/tvdlinde/Singular
+InfoFile  :	
+IdxFile   :	
+HtmlDir   :	
+ManualUrl :	https://www.singular.uni-kl.de/Manual/
+ExDir     :	
+Path      :	/home/ucl/theocat/tvdlinde/Singular/bin:/home/ucl/theocat/tvdlinde/Singular/bin/..:/home/ucl/theocat/tvdlinde/Singular/bin/../libexec/singular/MOD:/home/ucl/theocat/tvdlinde/Singular/libexec/singular/MOD:/opt/sw/arch/easybuild/2019b/software/libtool/2.4.6-GCCcore-8.3.0/bin:/opt/sw/arch/easybuild/2019b/software/M4/1.4.18-GCCcore-8.3.0/bin:/opt/sw/arch/easybuild/2019b/software/FFTW/3.3.8-gompi-2019b/bin:/opt/sw/arch/easybuild/2019b/software/OpenMPI/3.1.4-GCC-8.3.0/bin:/opt/sw/arch/easybuild/2019b/software/hwloc/1.11.12-GCCcore-8.3.0/sbin:/opt/sw/arch/easybuild/2019b/software/hwloc/1.11.12-GCCcore-8.3.0/bin:/opt/sw/arch/easybuild/2019b/software/libxml2/2.9.9-GCCcore-8.3.0/bin:/opt/sw/arch/easybuild/2019b/software/XZ/5.2.4-GCCcore-8.3.0/bin:/opt/sw/arch/easybuild/2019b/software/numactl/2.0.12-GCCcore-8.3.0/bin:/opt/sw/arch/easybuild/2019b/software/binutils/2.32-GCCcore-8.3.0/bin:/opt/sw/arch/easybuild/2019b/software/GCCcore/8.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+emacs     :	/usr/bin/emacs-24.3
+xemacs    :	
+SingularEmacs:	/home/ucl/theocat/tvdlinde/Singular/bin/Singular
+EmacsLoad :	/home/ucl/theocat/tvdlinde/Singular/bin/../share/singular/emacs/.emacs-singular
+EmacsDir  :	/home/ucl/theocat/tvdlinde/Singular/bin/../share/singular/emacs
+SingularXterm:	/home/ucl/theocat/tvdlinde/Singular/bin/Singular
+xterm     :	
+EmacsDir  :	/home/ucl/theocat/tvdlinde/Singular/bin/../share/singular/emacs
+Available HelpBrowsers: dummy, emacs, 
+Current HelpBrowser: dummy 
+                     SINGULAR                                 /  Development
+ A Computer Algebra System for Polynomial Computations       /   version 4.2.1
+                                                           0<
+ by: W. Decker, G.-M. Greuel, G. Pfister, H. Schoenemann     \   May 2021
+FB Mathematik der Universitaet, D-67653 Kaiserslautern        \
+> 
+halt 2

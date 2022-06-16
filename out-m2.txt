@@ -1,0 +1,9 @@
+Number of equations: 96
+Ring: (ZZ/2),(aa,ab,ac,ad,ba,bb,bc,bd,ca,cb,cc,cd,da,db,dc,dd),(dp(16),C)
+SOLVING EQUATIONS
+DONE (time taken: 1 seconds)
+si[1]=1
+Dimension of solution set: -1
+Looking for the coefficients.
+sm[1]=1
+DONE.

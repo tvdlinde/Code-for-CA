@@ -88,7 +88,7 @@ if( size(eqs) > 0 )
 
     };
   write(":a output-mprime.mathematica","fList = Table[f[i], {i, " + string(size(eqs)) + "}];");
-  write(":a output-mprime.mathematica","nuList = Table[mu[i], {i, " + string(size(eqs)) + "}];");
+  write(":a output-mprime.mathematica","nuList = Table[nu[i], {i, " + string(size(eqs)) + "}];");
   write(":a output-mprime.mathematica","Simplify[Evaluate[fList.nuList]]");
   print("DONE.");
 }

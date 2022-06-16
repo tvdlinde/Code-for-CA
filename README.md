@@ -1,4 +1,3 @@
-# WORK-IN-PROGRESS
 # Code for Cosmash Associativity
 
 This repository contains the code that was used by the authors to obtain part of the results in the article  
