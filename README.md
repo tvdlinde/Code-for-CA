@@ -17,7 +17,7 @@ to generate the file `equations.txt` which contains the equations. Then run
 
 to obtain the number _m_ in the article. The number _m'_ and proof that the system is inconsistent in characteristic 2 are obtained by applying the same process to `solve_equations_mprime.singular` and `solve_equations_m2.singular`. In each case a new file is created which can be opened inside Mathematica to check the outcome: the coefficients obtained by Singular are multiplied with the corresponding equations, the results are added, and what we get is the same number _m_ or _m'_ or _1_. Once inside Mathematica, run the file in question by entering
 
-> `Simplify[Import["output-m.mathematica", "Text"]]`
+> `ToExpression[Import["output-m.mathematica", "Text"]]`
 
 and the likes. Further information can be found in the article. Please contact us by email with any questions you may have.
 ## Authors 
