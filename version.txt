@@ -41,4 +41,3 @@ Current HelpBrowser: dummy
  by: W. Decker, G.-M. Greuel, G. Pfister, H. Schoenemann     \   May 2021
 FB Mathematik der Universitaet, D-67653 Kaiserslautern        \
 > 
-halt 2
