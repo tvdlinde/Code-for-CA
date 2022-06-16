@@ -1,0 +1,100 @@
+ring r=2,(aa,ab,ac,ad,ba,bb,bc,bd,ca,cb,cc,cd,da,db,dc,dd),dp;	
+
+
+//////////////////////////////////
+// READ THE EQUATIONS FROM DISK //
+//////////////////////////////////
+
+proc read_equations()
+{ 
+  if( status(":r equations.txt","exists") != "yes" )
+  {
+    ERROR("ERROR: 'equations.txt' does not exist. Run 'generate_equations.txt' to generate the equations file.");
+  }
+
+  string eqs_string = read("equations.txt");
+
+  list eqs;
+
+  execute("eqs = list(" + eqs_string + ")");
+
+  return( eqs );
+}
+
+
+///////////////////////////
+// SOLVING THE EQUATIONS //
+///////////////////////////
+
+proc make_ideal(list eqs)
+{
+  ideal ei = eqs[size(eqs)];
+  
+  for(int i=size(eqs)-1; i >=1; i--)
+  {
+    ei = ei + eqs[i];
+  }
+
+  return( ei );
+}
+
+proc solve_equations(ideal ei)
+{
+  print("Number of equations: " + string(size(ei)));
+  
+  print("Ring: " + string(r));
+
+  //////////////////////////////
+  int start_time = rtimer;
+  print("SOLVING EQUATIONS");
+  //////////////////////////////
+
+  ideal si=std(ei);
+
+  /////////////
+  print("DONE (time taken: " + string(rtimer-start_time) + " seconds)");
+  /////////////
+
+  return( si );
+}
+
+
+//////////////////
+// CALCULATIONS //
+//////////////////
+
+
+
+list eqs = read_equations();
+
+ideal ei;
+ideal si;
+
+if( size(eqs) > 0 )
+{
+  ei = make_ideal(eqs);
+  si = solve_equations(ei);
+  si;
+  print("Dimension of solution set: " + string(dim(si)));
+  print("Looking for the coefficients.");
+  matrix T;
+  ideal sm=liftstd(ei,T);
+  sm;
+  int k;
+  write(":w output-m2.mathematica","m = " + string(sm) + ";");
+  for (k=1; k<=size(eqs); k=k+1) {
+    write(":a output-m2.mathematica","f[" + string(k) + "] = " + string(eqs[size(eqs)-k+1]) + ";");
+    write(":a output-m2.mathematica","mu[" + string(k) + "] = " + string(T[k,1]) + ";");
+
+    };
+  write(":a output-m2.mathematica","fList = Table[f[i], {i, " + string(size(eqs)) + "}];");
+  write(":a output-m2.mathematica","muList = Table[mu[i], {i, " + string(size(eqs)) + "}];");
+  write(":a output-m2.mathematica","Simplify[Evaluate[fList.muList]]");
+  print("DONE.");
+}
+else
+{
+  print("No equations read.");
+}
+
+quit;
