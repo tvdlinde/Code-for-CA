@@ -4,18 +4,15 @@
 
 /*
 
-1) Executing 'generate_equations.txt' in Singular
+1) Executing 'generate_equations.singular' in Singular
    creates 'equations.txt', which contains the
    equations.
-   This step needs 'na.lib.txt' in the same folder.
+   This step needs 'na.lib' in the same folder.
 
-1) Executing 'solve_equations.txt' in Singular
+1) Executing 'solve_equations.singular' in Singular
    tries to solve the equations in 'equations.txt'.
-   This does NOT need 'na.lib.txt' in the same folder.
-
-NOTE: All filenames have .txt appended to the end so
-      that Overleaf recognizes them as text files.
-
+   This does NOT need 'na.lib' in the same folder.
+   
 */
 
 /**********************************************
@@ -24,12 +21,12 @@ NOTE: All filenames have .txt appended to the end so
 
 /*
 
-'na.lib.txt' defines the data type 'na_poly'
+'na.lib' defines the data type 'na_poly'
 which represents a non-associative polynomial.
 Some elementary operations like addition and
 multiplication are implemented.
 
-'na.lib.txt' also includes the 'na_mono' data
+'na.lib' also includes the 'na_mono' data
 type, which implements a non-associative monomial
 (element of a free unital magma).
 Some elementary operations are possible, like
@@ -44,7 +41,7 @@ ring r=0,(x,y),dp;
 
 // A custom library providing rudimentary handling of
 // non-associative polynomials.
-LIB "na.lib.txt";
+LIB "na.lib";
 
 // Names of the variables that will be used to form
 // non-associative monomials.
