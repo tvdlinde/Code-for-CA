@@ -7,11 +7,11 @@
 1) Executing 'generate_equations.singular' in Singular
    creates 'equations.txt', which contains the
    equations.
-   This step needs 'na.lib' in the same folder.
+   This step needs 'na.lib.singular' in the same folder.
 
 1) Executing 'solve_equations.singular' in Singular
    tries to solve the equations in 'equations.txt'.
-   This does NOT need 'na.lib' in the same folder.
+   This does NOT need 'na.lib.singular' in the same folder.
    
 */
 
