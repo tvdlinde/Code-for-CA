@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 info="
-LIBRARY:  na.lib        Rudimantary handling of non-associative polynomials
+LIBRARY:  na.lib        Rudimentary handling of non-associative polynomials
 ";
 
 
@@ -557,7 +557,7 @@ proc na_mono_multiplication_general()
 ---------------------------------*/
 
 // We can convert the multiplication tree to the usual string
-// represenation involving parentheses and variables.
+// representation involving parentheses and variables.
 
 proc na_mono_to_string(na_mono m)
 {
@@ -729,7 +729,7 @@ proc na_get_monomials(na_poly p)
 ---------------------------------------*/
 
 
-// If the list contains multiple terms with the same monimial,
+// If the list contains multiple terms with the same monomial,
 // add the coefficients and delete the repetitions. Additionally
 // remove the terms with with a zero coefficient.
 
@@ -911,6 +911,5 @@ proc na_poly_from_poly(poly cf)
 
 proc na_run_tests()
 {
-  // Run some tests to try to catch unintended behavior.
+  // Run some tests to try to catch unintended behaviour.
 }
-

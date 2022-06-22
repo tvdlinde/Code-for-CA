@@ -51,7 +51,7 @@ list na_vars = list("a","b","c","d");
 // declare structures and variables; install methods.
 na_init(na_vars);
 
-// After this point we can form nonassociative polynomials
+// After this point we can form non-associative polynomials
 // of type 'na_poly' as follows:
 
 na_poly example_p = 2*a*(b*c) - 3*b*b;
@@ -98,5 +98,3 @@ assert( a*(p*(b*p)) == x2y2*a*b ); // 'a*(p*(b*p))' evaluates to 'x2y2*a*b'
 //    detect, then one can write 'na_poly(m)' to turn a 'na_monomial'
 //    into a 'na_poly' or 'na_monomial(p)' to turn a suitable
 //    'na_poly' into a 'na_monomial'.
-
-
