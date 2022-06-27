@@ -2,7 +2,7 @@
 
 This repository contains the code that was used by the authors to obtain part of the results in the article  
 
-> Ülo Reimaa, Tim Van der Linden and Corentin Vienne, _Associativity and the cosmash product in operadic varieties of algebras_, 2022.
+> Ülo Reimaa, Tim Van der Linden and Corentin Vienne, _Associativity and the cosmash product in operadic varieties of algebras_, [preprint arXiv:2206.12096](https://arxiv.org/abs/2206.12096), 2022.
 
 All mathematical explanations are in the article; use of the code is explained in the file `how_to.txt` and in the code files themselves. Briefly:
 
